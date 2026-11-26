@@ -1,30 +1,18 @@
-# Design System & Conversion Architecture: Kẹo Lạc Nam Định - Việt Anh Shop
+# Design System: Kẹo Lạc Nam Định - Minimalist Cutout & Direct Conversion
 
-## 0. Design Read & Pre-Flight Verification
-- **Design Read:** *"Reading this as: Heritage artisan food D2C conversion landing page for Vietnamese tea-lovers & gift buyers, with a Heritage Craft Editorial language (Silk Porcelain & Nam Định Lacquer Vermilion), leaning toward Tailwind v4 + Plus Jakarta Sans / Be Vietnam Pro + GSAP ScrollTrigger."*
-- **Dials:** `DESIGN_VARIANCE: 7` | `MOTION_INTENSITY: 6` | `VISUAL_DENSITY: 4`
-- **Python Deterministic RNG (`gpt-taste`):**
-  - Prompt seed: `278 % 3 = 2` -> **Editorial Asymmetric Split Hero** (`max-w-3xl` left H1 in 2-3 lines + inline pill image, Double-Bezel visual stage on right)
-  - Typography Stack: **`Plus Jakarta Sans`** (Display) + **`Be Vietnam Pro`** (Body) + **`JetBrains Mono`** (Specs & Pricing) - zero `Inter`
-  - Component Arsenal: Inline Typography Micro-Image, Single Kinetic Marquee, Gapless `grid-flow-dense` Bento Grid, Tabbed Product Trilogy Stage, GSAP Sticky-Split Craft Section
-- **AIDA Verification:**
-  1. **Navigation:** Floating Fluid Island Pill (`<= 72px` height, single-line desktop, morphing hamburger on `< 768px`, dark-mode switch)
-  2. **Attention (Hero):** `min-h-[100dvh]`, `pt-24` cap, max 4 text elements, button-in-button pill CTA visible above fold, trust strip placed cleanly *below* hero
-  3. **Interest (Bento + Trilogy):** 5-cell gapless `grid-flow-dense` asymmetric grid + interactive 3-SKU showcase (`Kẹo Lạc Vừng 500g`, `Kẹo Dồi Lạc Vừng 200g`, `Kẹo Sìu Châu Đặc Biệt 200g`)
-  4. **Desire (GSAP Pinned Story + Ingredients):** Pinned tea-ritual column (`5.jpg`) paired with verified ingredient & lab metrics (`50 - 60%` sugar, `2 - 5%` protein, `3 - 9%` moisture, `0%` preservatives)
-  5. **Action (Combo Selector + Split Checkout):** 3 verified gift combos wired live to quantity/gift/weight calculator and WCAG AA checkout form
-- **Strict Bans Enforced:**
-  - Zero em-dashes or en-dashes anywhere in markup, scripts, or copy
-  - Zero emojis anywhere (100% crisp Phosphor SVG icons with uniform stroke weight)
-  - Eyebrow count: 2 across 8 sections (`2 <= ceil(8/3) = 3`)
-  - Single locked primary accent (`#9E1B1B` Lacquer Vermilion) across all sections, with dual light/dark theme parity
-
-## 1. Data Lineage (Verified vs. Prototype)
-- **Verified Source Data (from `kẹo lạc/` & `kẹo lạc/landing/`):**
-  - Producer: Cơ sở sản xuất bánh kẹo Lê Giáp / Lạc Giáp (Nam Định)
-  - SKUs: Kẹo Lạc Vừng (500g), Kẹo Dồi Lạc Vừng (200g), Kẹo Sìu Châu Loại Đặc Biệt (200g)
-  - Ingredients & Lab Specs (from `3.jpg` label & `landing/` PNGs): Lạc rang, Đường kính trắng (`50 - 60%`), Vani mạch nha, Vừng bóc (`Protein 2 - 5%`, `Độ ẩm 3 - 9%`), HSD 6 tháng, không chất bảo quản
-  - Combo Structures: 5 gói 200g tặng 1 gói 200g | 3 gói 500g tặng 2 gói 200g | 6 gói 500g tặng 3 gói 200g
-  - Guarantees: 100% rõ nguồn gốc chính hãng, Đủ cân đủ số lượng, Miễn phí ship toàn quốc
-- **Prototype Configuration (`js/config.js`):**
-  - Combo VNĐ prices, Hotline/Zalo number, and Webhook URL are isolated in `window.SITE_CONFIG` at the top of `js/config.js` with `isPrototypePricing: true` for instant owner customization.
+## 1. Visual Theme & Reference Alignment
+- **Style:** Sáng thoáng, tối giản, tập trung sản phẩm tách nền và đi thẳng vào vấn đề (kết hợp tinh thần **Airy Bakery White Canvas** và **Pop-Out Food Cards + Price Stamps**).
+- **Canvas & Surfaces:**
+  - Pure White (`#FFFFFF`) đan xen nền giấy kem nhạt (`#F7F5F2`) qua đường lượn sóng mềm mại.
+  - Card Combo nổi khối (`#EAE6E1` cho gói thường & Vàng mật mạch nha `#EEB04E` cho gói bán chạy nhất) với hình ảnh túi kẹo + quà tặng tràn viền phía trên (`pop-out cutout`) và tem giá tròn góc phải.
+- **Typography (100% Self-Hosted Vietnamese `.woff2`):**
+  - Display: `Plus Jakarta Sans` (Nâu rang `#432312`)
+  - Script Accent: `Dancing Script Variable` (Caramel `#C2742F`)
+  - Body: `Be Vietnam Pro` (`#5C4332` / `#6E4730`)
+  - Specs & Pricing: `JetBrains Mono`
+- **Bố cục 5 phần gọn rõ:**
+  1. **Hero tách nền + Vòng tròn giá 165K + Thẻ trắng giải quyết thẳng nỗi lo** (cứng đanh, dính răng, hôi dầu).
+  2. **3 Khung tròn nét vòng cung (`Half-Arc Medallions`)**: Giòn rụm không dính răng - Mẻ mới mỗi tuần - Túi nhỏ từng thanh.
+  3. **3 Vị kẹo gốc Lê Giáp + 3 Thẻ Combo Pop-Out tặng kèm Kẹo Dồi 200g**.
+  4. **Làm từ nguyên liệu gì?** (Cột trái 4 chỉ tiêu nhãn + Lưới 2x2 nguyên liệu tách nền trên nền trắng tinh).
+  5. **3 Cam kết chuẩn + Form đặt hàng 1 bước (COD kiểm hàng trước khi trả tiền)**.

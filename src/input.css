@@ -1,170 +1,118 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: "Dancing Script Variable", "Dancing Script", cursive;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-canvas: #FAF9F6;
-  --color-surface: #FFFFFF;
-  --color-silk: #F3EFEA;
-  --color-ink: #18181B;
-  --color-muted: #52525B;
-  --color-vermilion: #9E1B1B;
-  --color-vermilion-hover: #7F1515;
-  --color-vermilion-soft: #FEF2F2;
-  --color-malt: #B45309;
-  --color-malt-soft: #FEF3C7;
+  --color-roast: #432312;
+  --color-roast-light: #6E4730;
+  --color-caramel: #C2742F;
+  --color-malt: #EEAA43;
+  --color-malt-hover: #DF982E;
+  --color-cream: #F8F5F0;
+  --color-stone-card: #ECE9E4;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
-    background-color: #FAF9F6;
-    color: #18181B;
+    background-color: #FFFFFF;
+    color: #432312;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  html.dark {
-    background-color: #0F0F11;
-    color: #F4F4F5;
   }
 
   h1, h2, h3, h4, .font-display {
     font-family: var(--font-display);
   }
-}
 
-/* Fixed subtle film-grain layer (GPU-safe: fixed, pointer-events-none, never on scrolling elements) */
-.heritage-grain {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Honest Frosted Glass Approximation for Floating Navbar ONLY */
-.nav-island-glass {
-  border: 1px solid rgba(24, 24, 27, 0.08);
-  background: rgba(250, 249, 246, 0.84);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 12px 36px -8px rgba(24, 24, 27, 0.08);
-}
-
-html.dark .nav-island-glass {
-  border-color: rgba(255, 255, 255, 0.10);
-  background: rgba(24, 24, 27, 0.82);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 16px 40px -8px rgba(0, 0, 0, 0.55);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .nav-island-glass {
-    background: #FAF9F6;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-  html.dark .nav-island-glass {
-    background: #18181B;
+  .font-script {
+    font-family: var(--font-script);
   }
 }
 
-/* Double-Bezel (Doppelrand) Machined Enclosures */
-.bezel-shell {
-  padding: 0.5rem;
-  border-radius: 2rem;
-  background: rgba(24, 24, 27, 0.035);
-  border: 1px solid rgba(24, 24, 27, 0.07);
+/* Soft subtle paper dot/grain texture for warm sections (like Reference 1) */
+.soft-paper-bg {
+  background-color: #F7F5F2;
+  background-image: radial-gradient(rgba(67, 35, 18, 0.035) 1px, transparent 0);
+  background-size: 18px 18px;
 }
 
-html.dark .bezel-shell {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(255, 255, 255, 0.09);
+/* Reference 1: Brushed Circular Price Stamp */
+.price-stamp {
+  border-radius: 9999px;
+  box-shadow: 0 14px 30px -8px rgba(238, 170, 67, 0.45);
 }
 
-.bezel-core {
-  border-radius: calc(2rem - 0.5rem);
+.price-stamp-white {
+  border-radius: 9999px;
   background: #FFFFFF;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 10px 30px -10px rgba(158, 27, 27, 0.06);
+  box-shadow: 0 12px 26px -6px rgba(67, 35, 18, 0.14);
 }
 
-html.dark .bezel-core {
-  background: #18181B;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 14px 34px -10px rgba(0, 0, 0, 0.5);
-}
-
-/* Custom Cubic-Bezier Fluid Transitions */
-.ease-fluid {
-  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-/* Single Kinetic Marquee */
-@keyframes heritage-marquee {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: heritage-marquee 34s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-/* Skeletal Shimmer for Submit State */
-@keyframes shimmer-slide {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.skeleton-shimmer {
+/* Reference 2: Signature Half-Arc Circular Frame */
+.arc-frame-left {
   position: relative;
-  overflow: hidden;
 }
-
-.skeleton-shimmer::after {
+.arc-frame-left::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-  animation: shimmer-slide 1.2s infinite;
+  inset: -12px;
+  border-radius: 9999px;
+  border: 2.5px solid #432312;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  transform: rotate(-35deg);
+  pointer-events: none;
 }
 
-/* Reduced Motion Accessibility Mandate */
+.arc-frame-top {
+  position: relative;
+}
+.arc-frame-top::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 9999px;
+  border: 2.5px solid #C2742F;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+
+.arc-frame-right {
+  position: relative;
+}
+.arc-frame-right::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 9999px;
+  border: 2.5px solid #432312;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+/* Soft cutout drop shadow */
+.cutout-shadow {
+  filter: drop-shadow(0 20px 24px rgba(67, 35, 18, 0.16));
+}
+
+.cutout-shadow-sm {
+  filter: drop-shadow(0 12px 16px rgba(67, 35, 18, 0.14));
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .marquee-track {
-    animation: none !important;
-  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
