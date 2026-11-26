@@ -21,8 +21,8 @@ window.SITE_CONFIG = {
     spreadsheetId: "1p5P49tqsOqDQteAplpgLwfa1algZjIwAzbxGa0BNArI",
     spreadsheetUrl:
       "https://docs.google.com/spreadsheets/d/1p5P49tqsOqDQteAplpgLwfa1algZjIwAzbxGa0BNArI/edit#gid=0",
-    // Dán URL Web App sau khi bấm Deploy file google-sheets-webhook.gs tại đây:
-    webhookUrl: ""
+    webhookUrl:
+      "https://script.google.com/macros/s/AKfycbywsLyCuWR2BtJpMLRT_Za3MKBSL9Ouu4Optx6LqAhKOHjCaAzcLKKgwdEoIS9ftRyXvg/exec"
   },
 
   contact: {
@@ -31,7 +31,8 @@ window.SITE_CONFIG = {
     zaloUrl: "https://zalo.me/0988686868",
     address: "Đặc sản Kẹo Lạc Nam Định chính gốc Lê Giáp",
     workingHours: "07:30 - 22:00 (Tất cả các ngày trong tuần)",
-    orderWebhookUrl: ""
+    orderWebhookUrl:
+      "https://script.google.com/macros/s/AKfycbywsLyCuWR2BtJpMLRT_Za3MKBSL9Ouu4Optx6LqAhKOHjCaAzcLKKgwdEoIS9ftRyXvg/exec"
   },
 
   // Bảng giá 3 Combo chính thức
