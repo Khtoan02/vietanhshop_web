@@ -1,6 +1,6 @@
 /**
  * Giao diện tối giản, sáng thoáng theo chuẩn mẫu Bakery & Pop-out Food Cards
- * Kẹo Lạc Nam Định - Việt Anh Shop
+ * Bảng giá chính thức: Combo 3 gói 500g (165.000đ) | Combo 6 gói 500g (295.000đ) | Combo 5 gói 200g (165.000đ)
  */
 (function () {
   "use strict";
@@ -9,7 +9,7 @@
   if (!CFG) return;
 
   const formatVND = (num) =>
-    new Intl.NumberFormat("vi-VN").format(Math.round(num)) + "đ";
+    new Intl.NumberFormat("vi-VN").format(Math.round(num)) + " đ";
 
   const formatShortK = (num) => Math.round(num / 1000) + "K";
 
@@ -47,9 +47,17 @@
     const lowest = [...CFG.combos].sort((a, b) => a.salePrice - b.salePrice)[0];
     if (lowest) {
       const sPrice = document.getElementById("hero-stamp-price");
-      const sOld = document.getElementById("hero-stamp-old");
+      const sSub = document.getElementById("hero-stamp-old");
       if (sPrice) sPrice.textContent = formatShortK(lowest.salePrice);
-      if (sOld) sOld.textContent = formatShortK(lowest.originalPrice);
+      if (sSub) {
+        if (lowest.originalPrice) {
+          sSub.textContent = formatShortK(lowest.originalPrice);
+          sSub.classList.add("line-through");
+        } else {
+          sSub.textContent = "+ Quà tặng";
+          sSub.classList.remove("line-through");
+        }
+      }
     }
 
     const protoNotice = document.getElementById("prototype-price-banner");
@@ -99,13 +107,19 @@
           ? "bg-white hover:bg-stone-50 text-[#432312]"
           : "bg-[#EEAA43] hover:bg-[#DF982E] text-[#432312]";
 
+        const stampBottom = combo.originalPrice
+          ? `<span class="font-mono text-[11px] text-stone-400 line-through">${formatShortK(
+              combo.originalPrice
+            )}</span>`
+          : `<span class="text-[10px] font-bold text-[#C2742F]">Freeship</span>`;
+
         return `
         <article class="relative rounded-[2.2rem] ${cardBg} pt-24 pb-7 px-6 sm:px-7 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
-          <!-- Floating Pop-Out Cutout Packshot + Free Gift (Ref 1 Pop-out Tray) -->
+          <!-- Floating Pop-Out Cutout Packshot + Free Gift -->
           <div class="absolute -top-14 left-5 right-28 flex items-end gap-1.5 pointer-events-none">
             <img
               src="${combo.mainImage}"
-              alt="${combo.title}"
+              alt="${combo.title} - ${combo.productName}"
               width="240"
               height="165"
               loading="lazy"
@@ -121,15 +135,13 @@
             />
           </div>
 
-          <!-- Circular White Price Stamp on Top-Right (Ref 1 Price Circle) -->
+          <!-- Circular White Price Stamp on Top-Right -->
           <div class="price-stamp-white absolute -top-7 right-5 w-24 h-24 flex flex-col items-center justify-center text-center p-2">
             <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#6E4730]">GIÁ CHỈ</span>
             <span class="font-mono text-xl font-extrabold text-[#432312] leading-tight">${formatShortK(
               combo.salePrice
             )}</span>
-            <span class="font-mono text-[11px] text-stone-400 line-through">${formatShortK(
-              combo.originalPrice
-            )}</span>
+            ${stampBottom}
           </div>
 
           <div>
@@ -141,22 +153,27 @@
             <h3 class="font-display text-2xl font-extrabold text-[#432312] leading-snug">
               ${combo.title}
             </h3>
+            <p class="text-xs font-bold uppercase tracking-wide ${
+              isGold ? "text-[#432312]/80" : "text-[#6E4730]"
+            } mt-0.5">
+              ${combo.productName}
+            </p>
 
-            <p class="mt-2 inline-block rounded-full ${
-              isGold ? "bg-white/75" : "bg-white"
-            } px-3 py-1 text-xs font-bold text-[#432312]">
-              ${combo.giftText}
+            <p class="mt-2.5 inline-block rounded-full ${
+              isGold ? "bg-white/85" : "bg-white"
+            } px-3.5 py-1 text-xs font-extrabold text-[#432312]">
+              + ${combo.giftText}
             </p>
 
             <p class="mt-3 text-xs sm:text-sm ${bodyText} leading-relaxed">
-              ${combo.mainPackText}. ${combo.totalPacksText}, miễn phí giao hàng toàn quốc, kiểm hàng trước khi thanh toán.
+              ${combo.mainPackText}. ${combo.totalPacksText}, miễn phí giao hàng toàn quốc, mở thùng kiểm hàng trước khi thanh toán.
             </p>
           </div>
 
           <div class="mt-6 flex items-center justify-between gap-3 pt-4 border-t ${
             isGold ? "border-[#432312]/15" : "border-[#432312]/10"
           }">
-            <span class="font-mono text-base font-extrabold text-[#432312]">${formatVND(
+            <span class="font-mono text-lg font-extrabold text-[#432312]">${formatVND(
               combo.salePrice
             )}</span>
             <button
@@ -189,10 +206,10 @@
                 <div>
                   <span class="block font-display text-sm font-bold text-[#432312]">${
                     combo.title
-                  }</span>
-                  <span class="block text-xs text-[#C2742F] font-semibold">${
+                  } - ${combo.productName}</span>
+                  <span class="block text-xs text-[#C2742F] font-semibold">+ ${
                     combo.giftText
-                  }</span>
+                  } (Miễn phí ship)</span>
                 </div>
               </div>
               <span class="font-mono text-sm font-extrabold text-[#432312] shrink-0">${formatVND(
@@ -257,8 +274,6 @@
     });
 
     const totalSale = combo.salePrice * orderQty;
-    const totalOrig = combo.originalPrice * orderQty;
-    const totalSave = Math.max(0, totalOrig - totalSale);
     const totalGrams = combo.totalWeightGrams * orderQty;
 
     const setTxt = (id, val) => {
@@ -271,15 +286,13 @@
     if (mImg) mImg.src = combo.mainImage;
     if (gImg) gImg.src = combo.giftImage;
 
-    setTxt("summary-combo-title", combo.title);
+    setTxt("summary-combo-title", `${combo.title} - ${combo.productName}`);
     setTxt("summary-main-pack", `${orderQty} x ${combo.mainPackText}`);
     setTxt("summary-gift-pack", `${orderQty} x (${combo.giftText})`);
     setTxt("summary-qty", String(orderQty));
     setTxt("summary-weight", formatKg(totalGrams));
-    setTxt("summary-orig-price", formatVND(totalOrig));
-    setTxt("summary-saving", "-" + formatVND(totalSave));
     setTxt("summary-total-price", formatVND(totalSale));
-    setTxt("mobile-bar-title", combo.title);
+    setTxt("mobile-bar-title", `${combo.title} (${combo.giftShort})`);
     setTxt("mobile-bar-price", formatVND(combo.salePrice));
   }
 
@@ -353,7 +366,7 @@
         phone,
         address,
         note,
-        comboTitle: combo.title,
+        comboTitle: `${combo.title} - ${combo.productName}`,
         giftText: combo.giftText,
         quantity: orderQty,
         totalAmountVND: combo.salePrice * orderQty
@@ -379,7 +392,7 @@
       document.getElementById("success-customer").textContent =
         `${fullName} (${phone})`;
       document.getElementById("success-combo").textContent =
-        `${orderQty} x ${combo.title} (${combo.giftShort})`;
+        `${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftShort})`;
       document.getElementById("success-total").textContent = formatVND(
         payload.totalAmountVND
       );
@@ -387,7 +400,7 @@
       const copyBtn = document.getElementById("copy-order-zalo");
       if (copyBtn) {
         copyBtn.onclick = async () => {
-          const text = `Đơn ${orderCode} - ${fullName} (${phone})\n${orderQty} x ${combo.title} (${combo.giftText})\nTổng COD: ${formatVND(payload.totalAmountVND)} (Freeship)\nĐ/c: ${address}`;
+          const text = `Đơn ${orderCode} - ${fullName} (${phone})\n${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftText})\nTổng COD: ${formatVND(payload.totalAmountVND)} (Freeship)\nĐ/c: ${address}`;
           try {
             await navigator.clipboard.writeText(text);
           } catch (_) {}
