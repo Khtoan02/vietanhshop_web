@@ -285,7 +285,8 @@ function doPost(e) {
             updatedExistingRow = true;
             break;
           }
-          sheet.getRange(targetRow, 1, 1, HEADERS.length).setValues([rowValues]);
+          // Chỉ cập nhật 38 cột dữ liệu tự động (A..AL), giữ nguyên cột AM..AN của Telesale!
+          sheet.getRange(targetRow, 1, 1, rowValues.length).setValues([rowValues]);
           updatedExistingRow = true;
           break;
         }

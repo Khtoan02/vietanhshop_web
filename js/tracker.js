@@ -527,10 +527,13 @@
   // 6. Gửi dữ liệu an toàn CORS-proof (text/plain Simple Request + sendBeacon fallback)
   async function dispatchToSheet(payload, useBeaconOnly) {
     const cfg = window.SITE_CONFIG || {};
+    const isLocalPreview =
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost";
     const webhookUrl =
       (cfg.googleSheet && cfg.googleSheet.webhookUrl) ||
       (cfg.contact && cfg.contact.orderWebhookUrl) ||
-      "";
+      (isLocalPreview ? "/__local_sheet_sync" : "");
 
     // Luôn lưu bản ghi cục bộ để chủ shop kiểm tra nhanh & dự phòng mất mạng
     try {
