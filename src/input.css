@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-canvas: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-silk: #F3EFEA;
+  --color-ink: #18181B;
+  --color-muted: #52525B;
+  --color-vermilion: #9E1B1B;
+  --color-vermilion-hover: #7F1515;
+  --color-vermilion-soft: #FEF2F2;
+  --color-malt: #B45309;
+  --color-malt-soft: #FEF3C7;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: #FAF9F6;
+    color: #18181B;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.dark {
+    background-color: #0F0F11;
+    color: #F4F4F5;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Fixed subtle film-grain layer (GPU-safe: fixed, pointer-events-none, never on scrolling elements) */
+.heritage-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Honest Frosted Glass Approximation for Floating Navbar ONLY */
+.nav-island-glass {
+  border: 1px solid rgba(24, 24, 27, 0.08);
+  background: rgba(250, 249, 246, 0.84);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 12px 36px -8px rgba(24, 24, 27, 0.08);
+}
+
+html.dark .nav-island-glass {
+  border-color: rgba(255, 255, 255, 0.10);
+  background: rgba(24, 24, 27, 0.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 16px 40px -8px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav-island-glass {
+    background: #FAF9F6;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  html.dark .nav-island-glass {
+    background: #18181B;
+  }
+}
+
+/* Double-Bezel (Doppelrand) Machined Enclosures */
+.bezel-shell {
+  padding: 0.5rem;
+  border-radius: 2rem;
+  background: rgba(24, 24, 27, 0.035);
+  border: 1px solid rgba(24, 24, 27, 0.07);
+}
+
+html.dark .bezel-shell {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.bezel-core {
+  border-radius: calc(2rem - 0.5rem);
+  background: #FFFFFF;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 10px 30px -10px rgba(158, 27, 27, 0.06);
+}
+
+html.dark .bezel-core {
+  background: #18181B;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 14px 34px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom Cubic-Bezier Fluid Transitions */
+.ease-fluid {
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Single Kinetic Marquee */
+@keyframes heritage-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: heritage-marquee 34s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Skeletal Shimmer for Submit State */
+@keyframes shimmer-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: shimmer-slide 1.2s infinite;
+}
+
+/* Reduced Motion Accessibility Mandate */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
