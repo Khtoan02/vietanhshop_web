@@ -10,6 +10,7 @@
 window.SITE_CONFIG = {
   isPrototypePricing: false,
   brandName: "Việt Anh Shop",
+  slogan: "Tết đến cùng chúc nhau Thịnh Vượng",
   producerName: "Cơ sở Bánh kẹo Truyền thống Lê Giáp - Lạc Giáp",
   originLabel: "Nam Định",
 
