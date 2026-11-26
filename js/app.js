@@ -1,5 +1,5 @@
 /**
- * Giao diện tối giản, sáng thoáng theo chuẩn mẫu Bakery & Pop-out Food Cards
+ * Giao diện tối giản, sáng thoáng kết hợp Bộ đo lường Marketing 38 chỉ số (VA_TRACKER)
  * Bảng giá chính thức: Combo 3 gói 500g (165.000đ) | Combo 6 gói 500g (295.000đ) | Combo 5 gói 200g (165.000đ)
  */
 (function () {
@@ -74,6 +74,11 @@
     btns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const nextSrc = btn.getAttribute("data-hero-switch");
+        const packLabel = (btn.textContent || "").trim();
+        if (window.VA_TRACKER) {
+          window.VA_TRACKER.recordHeroPackView(packLabel);
+        }
+
         btns.forEach((b) => {
           b.className =
             "px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#432312] border border-stone-300/80 hover:border-[#432312] transition-colors";
@@ -92,7 +97,7 @@
     });
   }
 
-  // Render Pop-Out Combo Cards (Exact Reference 1 Bottom Card Layout!)
+  // Render Pop-Out Combo Cards
   function renderCombos() {
     const gridEl = document.getElementById("combo-cards-grid");
     const radioGroupEl = document.getElementById("checkout-combo-radios");
@@ -224,6 +229,13 @@
       radioGroupEl.querySelectorAll("input[name='comboId']").forEach((inp) => {
         inp.addEventListener("change", () => {
           selectedComboId = inp.value;
+          const chosen = CFG.combos.find((c) => c.id === selectedComboId);
+          if (chosen && window.VA_TRACKER) {
+            window.VA_TRACKER.recordComboSelect(
+              `${chosen.title} (${chosen.productName})`,
+              `Đổi ở Form: ${chosen.title}`
+            );
+          }
           updateSummary();
         });
       });
@@ -232,6 +244,13 @@
     gridEl.querySelectorAll("button[data-select-combo]").forEach((btn) => {
       btn.addEventListener("click", () => {
         selectedComboId = btn.getAttribute("data-select-combo");
+        const chosen = CFG.combos.find((c) => c.id === selectedComboId);
+        if (chosen && window.VA_TRACKER) {
+          window.VA_TRACKER.recordComboSelect(
+            `${chosen.title} (${chosen.productName})`,
+            `Bấm Card: ${chosen.title}`
+          );
+        }
         updateSummary();
         const target = document.getElementById("dat-hang");
         if (target) {
@@ -246,12 +265,14 @@
       minusBtn.addEventListener("click", () => {
         if (orderQty > 1) {
           orderQty -= 1;
+          if (window.VA_TRACKER) window.VA_TRACKER.recordQtyChange(orderQty);
           updateSummary();
         }
       });
       plusBtn.addEventListener("click", () => {
         if (orderQty < 20) {
           orderQty += 1;
+          if (window.VA_TRACKER) window.VA_TRACKER.recordQtyChange(orderQty);
           updateSummary();
         }
       });
@@ -359,30 +380,23 @@
         CFG.combos.find((c) => c.id === selectedComboId) || CFG.combos[0];
       const orderCode =
         "VA-" + String(Math.floor(100000 + Math.random() * 900000));
-      const payload = {
-        orderCode,
-        createdAt: new Date().toISOString(),
-        customerName: fullName,
-        phone,
-        address,
-        note,
-        comboTitle: `${combo.title} - ${combo.productName}`,
-        giftText: combo.giftText,
-        quantity: orderQty,
-        totalAmountVND: combo.salePrice * orderQty
-      };
+      const totalAmountVND = combo.salePrice * orderQty;
 
-      if (CFG.contact.orderWebhookUrl) {
-        try {
-          await fetch(CFG.contact.orderWebhookUrl, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-        } catch (_) {}
+      // Đẩy trọn bộ thông tin đơn hàng + 38 chỉ số hành vi Marketing về Google Sheet
+      if (window.VA_TRACKER) {
+        await window.VA_TRACKER.submitCompletedOrder({
+          orderCode,
+          customerName: fullName,
+          phone,
+          address,
+          note,
+          comboTitle: `${combo.title} - ${combo.productName}`,
+          quantity: orderQty,
+          unitPrice: combo.salePrice,
+          totalAmountVND
+        });
       } else {
-        await new Promise((r) => setTimeout(r, 450));
+        await new Promise((r) => setTimeout(r, 400));
       }
 
       submitBtn.disabled = false;
@@ -393,14 +407,13 @@
         `${fullName} (${phone})`;
       document.getElementById("success-combo").textContent =
         `${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftShort})`;
-      document.getElementById("success-total").textContent = formatVND(
-        payload.totalAmountVND
-      );
+      document.getElementById("success-total").textContent =
+        formatVND(totalAmountVND);
 
       const copyBtn = document.getElementById("copy-order-zalo");
       if (copyBtn) {
         copyBtn.onclick = async () => {
-          const text = `Đơn ${orderCode} - ${fullName} (${phone})\n${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftText})\nTổng COD: ${formatVND(payload.totalAmountVND)} (Freeship)\nĐ/c: ${address}`;
+          const text = `Đơn ${orderCode} - ${fullName} (${phone})\n${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftText})\nTổng COD: ${formatVND(totalAmountVND)} (Freeship)\nĐ/c: ${address}`;
           try {
             await navigator.clipboard.writeText(text);
           } catch (_) {}
@@ -416,6 +429,7 @@
       resetBtn.addEventListener("click", () => {
         form.reset();
         orderQty = 1;
+        if (window.VA_TRACKER) window.VA_TRACKER.startNewOrderCycle();
         updateSummary();
         successBox.classList.add("hidden");
         form.classList.remove("hidden");

@@ -2,8 +2,11 @@
  * ============================================================================
  * CẤU HÌNH TRUNG TÂM LANDING PAGE KẸO LẠC NAM ĐỊNH - VIỆT ANH SHOP
  * ============================================================================
- * Bảng giá 3 Combo đã được cập nhật chuẩn 100% theo bảng giá chính thức.
- * Bạn có thể chỉnh sửa thêm Số điện thoại, Zalo và Webhook nhận đơn tại mục [contact].
+ * 1. Bảng giá 3 Combo & Slogan đã được cập nhật chuẩn chính thức.
+ * 2. Kết nối Google Sheet:
+ *    - File đích: https://docs.google.com/spreadsheets/d/1p5P49tqsOqDQteAplpgLwfa1algZjIwAzbxGa0BNArI/edit#gid=0
+ *    - Dán link Web App Apps Script (https://script.google.com/macros/s/.../exec)
+ *      vào biến `googleSheet.webhookUrl` ngay bên dưới để đơn & hành vi khách tự đổ về Sheet 24/7.
  * ============================================================================
  */
 
@@ -14,17 +17,24 @@ window.SITE_CONFIG = {
   producerName: "Cơ sở Bánh kẹo Truyền thống Lê Giáp - Lạc Giáp",
   originLabel: "Nam Định",
 
+  googleSheet: {
+    spreadsheetId: "1p5P49tqsOqDQteAplpgLwfa1algZjIwAzbxGa0BNArI",
+    spreadsheetUrl:
+      "https://docs.google.com/spreadsheets/d/1p5P49tqsOqDQteAplpgLwfa1algZjIwAzbxGa0BNArI/edit#gid=0",
+    // Dán URL Web App sau khi bấm Deploy file google-sheets-webhook.gs tại đây:
+    webhookUrl: ""
+  },
+
   contact: {
     hotlineDisplay: "0988.686.868",
     hotlineTel: "0988686868",
     zaloUrl: "https://zalo.me/0988686868",
     address: "Đặc sản Kẹo Lạc Nam Định chính gốc Lê Giáp",
     workingHours: "07:30 - 22:00 (Tất cả các ngày trong tuần)",
-    // Dán URL Google Apps Script Web App nếu muốn tự động đổ đơn về Google Sheet:
     orderWebhookUrl: ""
   },
 
-  // Bảng giá 3 Combo chính thức (Thứ tự đúng theo ảnh bảng giá: Combo 3 gói -> Combo 6 gói -> Combo 5 gói)
+  // Bảng giá 3 Combo chính thức
   combos: [
     {
       id: "combo-3-goi-500g",
