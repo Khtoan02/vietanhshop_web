@@ -7,11 +7,7 @@ window.SITE_CONFIG = {
   tagline: "Kiểm tra và đeo thử trước khi thanh toán",
 
   contact: {
-    hotlineDisplay: "0988.686.868",
-    hotlineTel: "0988686868",
-    zaloUrl: "https://zalo.me/0988686868",
     address: "Giao hàng toàn quốc · Mở hộp đeo thử trước khi thanh toán",
-    workingHours: "08:00 - 22:00 hằng ngày",
     orderWebhookUrl: ""
   },
 

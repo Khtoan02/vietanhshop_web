@@ -26,11 +26,7 @@ window.SITE_CONFIG = {
   },
 
   contact: {
-    hotlineDisplay: "0988.686.868",
-    hotlineTel: "0988686868",
-    zaloUrl: "https://zalo.me/0988686868",
     address: "Đặc sản Kẹo Lạc Nam Định chính gốc Lê Giáp",
-    workingHours: "07:30 - 22:00 (Tất cả các ngày trong tuần)",
     orderWebhookUrl:
       "https://script.google.com/macros/s/AKfycbywsLyCuWR2BtJpMLRT_Za3MKBSL9Ouu4Optx6LqAhKOHjCaAzcLKKgwdEoIS9ftRyXvg/exec"
   },

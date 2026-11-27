@@ -23,15 +23,6 @@
     document.querySelectorAll("[data-bind='brandName']").forEach((el) => {
       el.textContent = cfg.brandName;
     });
-    document.querySelectorAll("[data-bind='hotlineDisplay']").forEach((el) => {
-      el.textContent = cfg.contact.hotlineDisplay;
-    });
-    document.querySelectorAll("[data-bind='hotlineHref']").forEach((el) => {
-      el.setAttribute("href", `tel:${cfg.contact.hotlineTel}`);
-    });
-    document.querySelectorAll("[data-bind='zaloHref']").forEach((el) => {
-      el.setAttribute("href", cfg.contact.zaloUrl);
-    });
     document.querySelectorAll("[data-bind='address']").forEach((el) => {
       el.textContent = cfg.contact.address;
     });
@@ -144,7 +135,6 @@
     const form = document.getElementById("order-form");
     const successBox = document.getElementById("order-success-state");
     const newOrderBtn = document.getElementById("order-new-btn");
-    const copyZaloBtn = document.getElementById("copy-order-zalo");
 
     if (minusBtn) {
       minusBtn.addEventListener("click", () => {
@@ -259,18 +249,6 @@
         if (window.VA_TRACKER) window.VA_TRACKER.startNewOrderCycle();
         successBox.classList.add("hidden");
         form.classList.remove("hidden");
-      });
-    }
-
-    if (copyZaloBtn) {
-      copyZaloBtn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(state.lastOrderText);
-          copyZaloBtn.textContent = "Đã sao chép · Đang mở Zalo";
-        } catch (_) {}
-        setTimeout(() => {
-          window.open(cfg.contact.zaloUrl, "_blank", "noopener");
-        }, 250);
       });
     }
   }

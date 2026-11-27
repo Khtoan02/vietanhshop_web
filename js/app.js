@@ -31,15 +31,6 @@
     document.querySelectorAll("[data-bind='brandName']").forEach((el) => {
       el.textContent = CFG.brandName;
     });
-    document.querySelectorAll("[data-bind='hotlineDisplay']").forEach((el) => {
-      el.textContent = CFG.contact.hotlineDisplay;
-    });
-    document.querySelectorAll("[data-bind='hotlineHref']").forEach((el) => {
-      el.setAttribute("href", "tel:" + CFG.contact.hotlineTel);
-    });
-    document.querySelectorAll("[data-bind='zaloHref']").forEach((el) => {
-      el.setAttribute("href", CFG.contact.zaloUrl);
-    });
     document.querySelectorAll("[data-bind='address']").forEach((el) => {
       el.textContent = CFG.contact.address;
     });
@@ -409,17 +400,6 @@
         `${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftShort})`;
       document.getElementById("success-total").textContent =
         formatVND(totalAmountVND);
-
-      const copyBtn = document.getElementById("copy-order-zalo");
-      if (copyBtn) {
-        copyBtn.onclick = async () => {
-          const text = `Đơn ${orderCode} - ${fullName} (${phone})\n${orderQty} x ${combo.title} - ${combo.productName} (${combo.giftText})\nTổng COD: ${formatVND(totalAmountVND)} (Freeship)\nĐ/c: ${address}`;
-          try {
-            await navigator.clipboard.writeText(text);
-          } catch (_) {}
-          window.open(CFG.contact.zaloUrl, "_blank", "noopener");
-        };
-      }
 
       form.classList.add("hidden");
       successBox.classList.remove("hidden");

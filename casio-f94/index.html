@@ -13,10 +13,10 @@
   <meta property="og:description" content="Thiết kế mặt vuông cổ điển Nhật Bản. Nhẹ 21g, mỏng 8.5mm, pin 7 năm. Mở hộp đeo thử trước khi thanh toán." />
   <meta property="og:image" content="/casio-f94/assets/images/og-casio-f94.jpg" />
 
-  <link rel="preload" as="image" href="/casio-f94/assets/images/f94-studio-front.webp?v=3.1" fetchpriority="high" />
-  <link rel="stylesheet" href="/casio-f94/assets/css/fonts.css?v=3.1" />
-  <link rel="stylesheet" href="/casio-f94/assets/css/styles.css?v=3.1" />
-  <link rel="icon" type="image/webp" href="/casio-f94/assets/images/f94-favicon.webp?v=3.1" />
+  <link rel="preload" as="image" href="/casio-f94/assets/images/f94-studio-front.webp?v=3.2" fetchpriority="high" />
+  <link rel="stylesheet" href="/casio-f94/assets/css/fonts.css?v=3.2" />
+  <link rel="stylesheet" href="/casio-f94/assets/css/styles.css?v=3.2" />
+  <link rel="icon" type="image/webp" href="/casio-f94/assets/images/f94-favicon.webp?v=3.2" />
 </head>
 <body class="bg-white text-[#111111] antialiased selection:bg-[#111111] selection:text-white">
 
@@ -31,21 +31,12 @@
         <span class="font-mono text-xs text-[#6E6E73]">F-94WA-9</span>
       </a>
 
-      <div class="flex items-center gap-5">
-        <a
-          href="tel:0988686868"
-          data-bind="hotlineHref"
-          class="hidden sm:inline font-mono text-xs text-[#6E6E73] hover:text-[#111111] transition-colors tabular-nums"
-        >
-          <span data-bind="hotlineDisplay">0988.686.868</span>
-        </a>
-        <a
-          href="#dat-hang"
-          class="inline-flex items-center rounded-lg bg-[#111111] hover:bg-[#2A2A2E] text-white px-4 py-2 font-display text-xs font-semibold tracking-tight transition active:scale-[0.98]"
-        >
-          Đặt mua · 139.000 đ
-        </a>
-      </div>
+      <a
+        href="#dat-hang"
+        class="inline-flex items-center rounded-lg bg-[#111111] hover:bg-[#2A2A2E] text-white px-4 py-2 font-display text-xs font-semibold tracking-tight transition active:scale-[0.98]"
+      >
+        Đặt mua · 139.000 đ
+      </a>
     </div>
   </header>
 
@@ -425,20 +416,17 @@
                 <p>Thanh toán COD: <strong id="success-total" class="font-mono text-sm text-[#111111] tabular-nums"></strong> (Miễn phí ship)</p>
               </div>
 
-              <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
-                <button
-                  id="copy-order-zalo"
-                  type="button"
-                  class="rounded-lg bg-[#111111] text-white px-5 py-2.5 font-display text-xs font-semibold cursor-pointer"
-                >
-                  Sao chép đơn &amp; Nhắn Zalo
-                </button>
+              <p class="text-xs text-[#6E6E73]">
+                Việt Anh Shop đã nhận thông tin và sẽ chủ động liên hệ trao đổi, xác nhận đơn hàng với bạn sớm nhất.
+              </p>
+
+              <div class="flex items-center justify-center pt-1">
                 <button
                   id="order-new-btn"
                   type="button"
                   class="rounded-lg border border-[#DADAD6] px-5 py-2.5 font-display text-xs font-semibold text-[#6E6E73] hover:text-[#111111] cursor-pointer"
                 >
-                  Quay lại
+                  Đặt thêm đơn khác
                 </button>
               </div>
             </div>
@@ -457,17 +445,10 @@
       <div>
         <strong class="font-display text-[#111111]" data-bind="brandName">Việt Anh Shop</strong>
         <span class="mx-1.5">·</span>
-        <span data-bind="address">Giao hàng toàn quốc · Mở hộp đeo thử trước khi thanh toán</span>
+        <span class="font-mono">Casio F-94WA-9</span>
       </div>
 
-      <div class="flex items-center gap-4">
-        <a href="tel:0988686868" data-bind="hotlineHref" class="font-mono text-[#111111] hover:underline tabular-nums">
-          <span data-bind="hotlineDisplay">0988.686.868</span>
-        </a>
-        <a href="https://zalo.me/0988686868" data-bind="zaloHref" target="_blank" rel="noopener" class="text-[#111111] underline underline-offset-4">
-          Zalo hỗ trợ
-        </a>
-      </div>
+      <span data-bind="address">Giao hàng toàn quốc · Mở hộp đeo thử trước khi thanh toán</span>
     </div>
   </footer>
 
@@ -490,8 +471,8 @@
     </a>
   </div>
 
-  <script src="/casio-f94/js/config.js?v=3.1" defer></script>
-  <script src="/casio-f94/js/tracker.js?v=3.1" defer></script>
-  <script src="/casio-f94/js/app.js?v=3.1" defer></script>
+  <script src="/casio-f94/js/config.js?v=3.2" defer></script>
+  <script src="/casio-f94/js/tracker.js?v=3.2" defer></script>
+  <script src="/casio-f94/js/app.js?v=3.2" defer></script>
 </body>
 </html>

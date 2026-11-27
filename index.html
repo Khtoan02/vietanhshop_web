@@ -14,8 +14,8 @@
   <meta property="og:image" content="./assets/images/og-banner.jpg" />
 
   <link rel="preload" as="image" href="./assets/images/hero-family-packs.webp" fetchpriority="high" />
-  <link rel="stylesheet" href="./assets/css/fonts.css" />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="./assets/css/fonts.css?v=3.2" />
+  <link rel="stylesheet" href="./assets/css/styles.css?v=3.2" />
   <link rel="icon" type="image/webp" href="./assets/images/logo-keo-lac-nam-dinh.webp" />
 </head>
 <body class="bg-white text-[#432312] antialiased selection:bg-[#EEAA43] selection:text-[#432312]">
@@ -44,17 +44,6 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <a
-          href="tel:0988686868"
-          data-bind="hotlineHref"
-          class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#6E4730] hover:text-[#432312]"
-        >
-          <svg viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-[#C2742F]" aria-hidden="true">
-            <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46Z"></path>
-          </svg>
-          <span data-bind="hotlineDisplay">0988.686.868</span>
-        </a>
-
         <a
           href="#combo-uu-dai"
           class="inline-flex items-center gap-2 rounded-full bg-[#EEAA43] hover:bg-[#DF982E] text-[#432312] px-5 py-2 font-display text-xs sm:text-sm font-bold transition-all active:scale-95"
@@ -663,18 +652,15 @@
                   <p>Thanh toán khi nhận hàng: <strong id="success-total" class="font-mono text-base text-[#C2742F]"></strong></p>
                 </div>
 
+                <p class="text-xs text-[#6E4730]">
+                  Việt Anh Shop đã nhận thông tin và sẽ chủ động liên hệ trao đổi, xác nhận đơn hàng với bạn sớm nhất.
+                </p>
+
                 <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-                  <button
-                    id="copy-order-zalo"
-                    type="button"
-                    class="rounded-full bg-[#432312] text-white px-6 py-3 font-display text-xs font-bold uppercase tracking-wider"
-                  >
-                    Sao chép đơn &amp; Nhắn Zalo
-                  </button>
                   <button
                     id="order-new-btn"
                     type="button"
-                    class="rounded-full border border-stone-300 px-6 py-3 font-display text-xs font-bold text-[#6E4730]"
+                    class="rounded-full border border-stone-300 px-6 py-3 font-display text-xs font-bold text-[#6E4730] cursor-pointer"
                   >
                     Đặt thêm đơn khác
                   </button>
@@ -701,14 +687,9 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-4 text-xs font-semibold">
-        <a href="tel:0988686868" data-bind="hotlineHref" class="font-mono text-[#432312] hover:text-[#C2742F]">
-          Hotline: <span data-bind="hotlineDisplay">0988.686.868</span>
-        </a>
-        <a href="https://zalo.me/0988686868" data-bind="zaloHref" target="_blank" rel="noopener" class="underline underline-offset-4 text-[#C2742F]">
-          Nhắn Zalo
-        </a>
-      </div>
+      <p class="text-xs font-medium text-[#6E4730]">
+        Giao hàng toàn quốc · Mở thùng kiểm hàng trước khi thanh toán
+      </p>
     </div>
   </footer>
 
@@ -720,7 +701,7 @@
     <div class="min-w-0">
       <p id="mobile-bar-title" class="text-xs font-bold text-[#432312] truncate">Combo 3 Gói Kẹo Lạc Vừng 500g</p>
       <p class="text-[11px] text-[#6E4730]">
-        Giá ưu đãi: <strong id="mobile-bar-price" class="font-mono text-xs text-[#C2742F]">225.000đ</strong> (Freeship)
+        Giá ưu đãi: <strong id="mobile-bar-price" class="font-mono text-xs text-[#C2742F]">165.000 đ</strong> (Freeship)
       </p>
     </div>
     <a
@@ -731,8 +712,8 @@
     </a>
   </div>
 
-  <script src="./js/config.js" defer></script>
-  <script src="./js/tracker.js" defer></script>
-  <script src="./js/app.js" defer></script>
+  <script src="./js/config.js?v=3.2" defer></script>
+  <script src="./js/tracker.js?v=3.2" defer></script>
+  <script src="./js/app.js?v=3.2" defer></script>
 </body>
 </html>
