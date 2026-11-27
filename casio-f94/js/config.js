@@ -45,7 +45,7 @@ window.SITE_CONFIG = {
       salePrice: 139000,
       originalPrice: null,
       freeShip: true,
-      mainImage: "./assets/images/casio-f94-cutout.webp"
+      mainImage: "/casio-f94/assets/images/casio-f94-cutout.webp"
     },
     {
       id: "combo-doi-2-chiec",
@@ -62,7 +62,7 @@ window.SITE_CONFIG = {
       salePrice: 278000,
       originalPrice: null,
       freeShip: true,
-      mainImage: "./assets/images/casio-f94-pair.webp"
+      mainImage: "/casio-f94/assets/images/casio-f94-pair.webp"
     },
     {
       id: "combo-nhom-3-chiec",
@@ -79,7 +79,7 @@ window.SITE_CONFIG = {
       salePrice: 417000,
       originalPrice: null,
       freeShip: true,
-      mainImage: "./assets/images/casio-f94-trio.webp"
+      mainImage: "/casio-f94/assets/images/casio-f94-trio.webp"
     }
   ]
 };
