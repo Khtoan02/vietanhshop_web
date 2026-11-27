@@ -4,13 +4,6 @@
   --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-
-  --color-carbon: #141619;
-  --color-slate-muted: #4B5563;
-  --color-casio-yellow: #F2C230;
-  --color-casio-yellow-hover: #E0AF1B;
-  --color-stone-bg: #F4F5F7;
-  --color-card-gray: #ECEEF2;
 }
 
 @layer base {
@@ -27,75 +20,20 @@
   }
 }
 
-/* Subtle Swiss Technical Dot Grid */
-.soft-tech-bg {
-  background-color: #F4F5F7;
-  background-image: radial-gradient(rgba(20, 22, 25, 0.05) 1px, transparent 0);
-  background-size: 18px 18px;
+.tech-grid-light {
+  background-color: #F6F7F9;
+  background-image: radial-gradient(rgba(20, 22, 25, 0.055) 1px, transparent 0);
+  background-size: 20px 20px;
 }
 
-/* Circular Price Stamps */
-.price-stamp-yellow {
-  border-radius: 9999px;
-  box-shadow: 0 14px 30px -8px rgba(242, 194, 48, 0.50);
+.tech-grid-dark {
+  background-color: #111317;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 0);
+  background-size: 22px 22px;
 }
 
-.price-stamp-white {
-  border-radius: 9999px;
-  background: #FFFFFF;
-  box-shadow: 0 12px 26px -6px rgba(20, 22, 25, 0.14);
-}
-
-/* Half-Arc Medallion Frames */
-.arc-frame-top,
-.arc-frame-left,
-.arc-frame-right {
-  position: relative;
-}
-
-.arc-frame-top::before {
-  content: "";
-  position: absolute;
-  inset: -11px;
-  border-radius: 9999px;
-  border: 2.5px solid #F2C230;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  transform: rotate(-45deg);
-  pointer-events: none;
-}
-
-.arc-frame-left::before {
-  content: "";
-  position: absolute;
-  inset: -11px;
-  border-radius: 9999px;
-  border: 2.5px solid #141619;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  transform: rotate(-35deg);
-  pointer-events: none;
-}
-
-.arc-frame-right::before {
-  content: "";
-  position: absolute;
-  inset: -11px;
-  border-radius: 9999px;
-  border: 2.5px solid #141619;
-  border-left-color: transparent;
-  border-top-color: transparent;
-  transform: rotate(-30deg);
-  pointer-events: none;
-}
-
-/* Crisp Studio Cutout Drop Shadow */
 .cutout-shadow {
-  filter: drop-shadow(0 22px 26px rgba(20, 22, 25, 0.18));
-}
-
-.cutout-shadow-sm {
-  filter: drop-shadow(0 12px 16px rgba(20, 22, 25, 0.14));
+  filter: drop-shadow(0 20px 28px rgba(20, 22, 25, 0.18));
 }
 
 @media (prefers-reduced-motion: reduce) {
