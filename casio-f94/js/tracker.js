@@ -17,21 +17,19 @@
 
   const VN_PHONE_REGEX = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
 
-  const SECTION_LABELS = {
+  const DEFAULT_SECTION_LABELS = {
     "trang-chu": "Đầu trang (Hero)",
     "diem-khac-biet": "Điểm khác biệt",
-    "combo-uu-dai": "3 Vị kẹo & Bảng giá Combo",
-    "nguyen-lieu": "Nguyên liệu & Chỉ tiêu",
+    "combo-uu-dai": "Bảng giá & Phiên bản",
+    "nguyen-lieu": "Thông số & Chất liệu",
     "dat-hang": "Khu vực Đặt hàng"
   };
 
-  const ALL_KEY_SECTIONS = [
-    "trang-chu",
-    "diem-khac-biet",
-    "combo-uu-dai",
-    "nguyen-lieu",
-    "dat-hang"
-  ];
+  const SECTION_LABELS =
+    (window.SITE_CONFIG && window.SITE_CONFIG.sectionLabels) ||
+    DEFAULT_SECTION_LABELS;
+
+  const ALL_KEY_SECTIONS = Object.keys(SECTION_LABELS);
 
   // Tạo hoặc khôi phục Visitor ID & Session ID
   function randomId(prefix) {
@@ -373,16 +371,17 @@
   // 4. Tính toán mức độ đọc hết Landing & Điểm Lead Score (/100)
   function computeReadStatus() {
     const readCount = sectionsReadSet.size;
-    if (maxScrollPct >= 90 && readCount >= 4) {
-      return `Đã đọc hết bài (${maxScrollPct}% - ${readCount}/5 phần)`;
+    const totalSecCount = Math.max(1, ALL_KEY_SECTIONS.length);
+    if (maxScrollPct >= 90 && readCount >= Math.max(1, totalSecCount - 1)) {
+      return `Đã đọc hết bài (${maxScrollPct}% - ${readCount}/${totalSecCount} phần)`;
     }
-    if (maxScrollPct >= 75 || readCount >= 4) {
-      return `Đọc phần lớn (${maxScrollPct}% - ${readCount}/5 phần)`;
+    if (maxScrollPct >= 75 || readCount >= Math.max(1, totalSecCount - 1)) {
+      return `Đọc phần lớn (${maxScrollPct}% - ${readCount}/${totalSecCount} phần)`;
     }
-    if (maxScrollPct >= 50 || readCount >= 3) {
-      return `Đọc khoảng một nửa (${maxScrollPct}% - ${readCount}/5 phần)`;
+    if (maxScrollPct >= 50 || readCount >= Math.ceil(totalSecCount / 2)) {
+      return `Đọc khoảng một nửa (${maxScrollPct}% - ${readCount}/${totalSecCount} phần)`;
     }
-    return `Mới xem đầu trang (${maxScrollPct}% - ${readCount}/5 phần)`;
+    return `Mới xem đầu trang (${maxScrollPct}% - ${readCount}/${totalSecCount} phần)`;
   }
 
   function computeDwellSummary() {
