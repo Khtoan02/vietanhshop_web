@@ -4,7 +4,7 @@
   "private": true,
   "description": "Landing Page Đặc Sản Kẹo Lạc Nam Định - Việt Anh Shop",
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/styles.css --minify"
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/styles.css --minify && npx @tailwindcss/cli -i ./casio-f94/src/input.css -o ./casio-f94/assets/css/styles.css --minify"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.5",
