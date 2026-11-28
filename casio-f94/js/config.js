@@ -35,8 +35,7 @@ window.SITE_CONFIG = {
     sku: "F-94WA-9",
     name: "Đồng Hồ Casio F94 Classic",
     colorName: "Đen viền Vàng cổ điển",
-    unitPrice: 139000,
-    warranty: "Đổi mới trong 30 ngày nếu lỗi máy"
+    unitPrice: 139000
   },
 
   gallery: [
